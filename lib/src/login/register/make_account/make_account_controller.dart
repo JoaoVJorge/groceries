@@ -1,0 +1,42 @@
+import 'package:app_congonhas/path/app_routes.dart';
+import 'package:get/get.dart';
+
+class MakeAccountController extends DisposableInterface {
+  String email = "";
+  String password = "";
+
+  final RxString errorText = "".obs;
+
+  void setEmail(String email) {
+    this.email = email;
+  }
+
+  void setPassword(String password) {
+    this.password = password;
+  }
+
+  void checkCredentials() {
+    if (email.isEmpty || password.isEmpty) {
+      errorText.value = "Credentials can't be empty";
+    } else if (email.length > 70) {
+      errorText.value = "Email too long";
+    } else if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email)) {
+      errorText.value = "Not a valid Email";
+    } else {
+      errorText.value = "";
+    }
+  }
+
+  String registerText =
+      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ";
+
+  void goToWelcome() {
+    Get.back();
+  }
+
+  void goToEnterAccount() {
+    Get.toNamed(AppRoutes.enterAccount);
+  }
+}

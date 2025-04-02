@@ -1,0 +1,1 @@
+ /home/jorge/Documents/Codes/Flutter/app_congonhas/.dart_tool/flutter_build/447360f82795a0704352c05061887c92/native_assets.yaml: 

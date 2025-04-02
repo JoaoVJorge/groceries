@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/jorge/Documents/Codes/Flutter/app_congonhas/build/linux/x64/debug/cmake_install.cmake",
+		"/home/jorge/Documents/Codes/Flutter/app_congonhas/build/linux/x64/debug/flutter/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
