@@ -130,7 +130,7 @@ class BuyingView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      width: 10,
+                      width: 12,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
