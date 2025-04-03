@@ -24,8 +24,13 @@ class HomeController extends DisposableInterface {
     if (text.isEmpty) {
       filteredGroceries.addAll(allGroceryItems);
     } else {
-      filteredGroceries
-          .addAll(allGroceryItems.where((final e) => e.name.contains(text)));
+      filteredGroceries.addAll(
+        allGroceryItems.where(
+          (final e) => e.name.toLowerCase().contains(
+                text.toLowerCase(),
+              ),
+        ),
+      );
     }
   }
 
@@ -34,8 +39,9 @@ class HomeController extends DisposableInterface {
     if (text == null) {
       filteredGroceries.addAll(allGroceryItems);
     } else {
-      filteredGroceries
-          .addAll(allGroceryItems.where((final e) => e.type == text));
+      filteredGroceries.addAll(
+        allGroceryItems.where((final e) => e.type == text),
+      );
     }
   }
 

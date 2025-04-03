@@ -55,145 +55,145 @@ class SearchingItens extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Obx(
-        () {
-          if (!onSearch.value) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Daily\nGrocery Food",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: AppColours.primaryColour,
-                          fontSize: 60,
-                          height: 0.9,
-                          fontWeight: FontWeight.w600,
+        () => !onSearch.value
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Daily\nGrocery Food",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: AppColours.primaryColour,
+                            fontSize: 60,
+                            height: 0.9,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      Container(
-                        width: 80,
-                        height: 120,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(40)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.3),
-                              spreadRadius: 0.5,
-                              blurRadius: 5,
+                        Container(
+                          width: 80,
+                          height: 120,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.3),
+                                spreadRadius: 0.5,
+                                blurRadius: 5,
+                              ),
+                            ],
+                          ),
+                          child: InkWell(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(50)),
+                            onTap: () {
+                              changeState();
+                              onFiltered(null);
+                            },
+                            child: Center(
+                              child: SvgPicture.asset(
+                                "assets/icons/search.svg",
+                                height: 45,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColours.primaryColour,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
                             ),
-                          ],
+                          ),
                         ),
-                        child: InkWell(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(50)),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    FilterItem(
+                      onFiltered: onFiltered,
+                    ),
+                  ],
+                ),
+              )
+            : Container(
+                decoration: const BoxDecoration(
+                  color: AppColours.primaryColour,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
                           onTap: () {
                             changeState();
                             onFiltered(null);
                           },
-                          child: Center(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                            padding: const EdgeInsets.all(8),
+                            height: 90,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(width: 2.5, color: Colors.white),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                             child: SvgPicture.asset(
-                              "assets/icons/search.svg",
-                              height: 45,
+                              "assets/icons/arrow-left.svg",
                               colorFilter: const ColorFilter.mode(
-                                AppColours.primaryColour,
+                                Colors.white,
                                 BlendMode.srcIn,
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  FilterItem(
-                    onFiltered: onFiltered,
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return Container(
-              decoration: const BoxDecoration(
-                color: AppColours.primaryColour,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: changeState,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 12,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          height: 90,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2.5, color: Colors.white),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: SvgPicture.asset(
-                            "assets/icons/arrow-left.svg",
-                            colorFilter: const ColorFilter.mode(
-                              Colors.white,
-                              BlendMode.srcIn,
-                            ),
+                        const SizedBox(
+                          width: 100,
+                        ),
+                        const Text(
+                          "Search",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 50,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
+                      ],
+                    ),
+                    Container(
+                      height: 60,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      margin: const EdgeInsets.only(
+                        bottom: 16,
+                        left: 15,
+                        right: 15,
+                        top: 10,
                       ),
-                      const SizedBox(
-                        width: 100,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        color: Colors.white,
                       ),
-                      const Text(
-                        "Search",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 50,
-                          fontWeight: FontWeight.w500,
+                      child: TextFormField(
+                        style: const TextStyle(fontSize: 20),
+                        decoration: const InputDecoration(
+                          hintText: "What's your desire?",
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(fontSize: 20),
                         ),
+                        onChanged: onSearchChanged,
                       ),
-                    ],
-                  ),
-                  Container(
-                    height: 60,
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    margin: const EdgeInsets.only(
-                      bottom: 16,
-                      left: 15,
-                      right: 15,
-                      top: 10,
                     ),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: Colors.white,
-                    ),
-                    child: TextFormField(
-                      style: const TextStyle(fontSize: 20),
-                      decoration: const InputDecoration(
-                        hintText: "What's your desire?",
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(fontSize: 20),
-                      ),
-                      onChanged: onSearchChanged,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            );
-          }
-        },
       );
 }
 
@@ -269,7 +269,6 @@ class OferringProducts extends StatelessWidget {
   final RxBool onSearch;
 
   @override
-  @override
   Widget build(final BuildContext context) => Expanded(
         child: Obx(
           () => DecoratedBox(
@@ -285,7 +284,7 @@ class OferringProducts extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(45)),
               ),
               child: GridView.builder(
                 itemCount: groceryList.length,

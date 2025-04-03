@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/database.dart';
 import '../../../../theme/colours.dart';
@@ -68,7 +69,11 @@ class BuyingView extends StatelessWidget {
                   ),
                 ),
                 const Expanded(child: SizedBox()),
-                const AddingWidget(),
+                AddingWidget(
+                  addKilograms: controller.addKilograms,
+                  takeKilograms: controller.takeKilograms,
+                  ammountOfItens: controller.ammountOfItens,
+                ),
               ],
             ),
           ),
@@ -114,39 +119,55 @@ class BuyingView extends StatelessWidget {
                     color: AppColours.primaryColour,
                   ),
                 ),
-                Row(
-                  children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.black,
-                      ),
-                      child: Image.asset(
-                        allReviews[0].user.imageUrl,
-                        fit: BoxFit.cover, // Fills the circular area properly
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          allReviews[0].user.name,
-                          style: const TextStyle(
-                            color: AppColours.primaryColour,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                SizedBox(
+                  height: 80,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(),
+                          color: Colors.black,
+                        ),
+                        child: ClipOval(
+                          // Ensures the image is clipped to a circle
+                          child: Image.asset(
+                            allReviews[0].user.imageUrl,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        const Rating(),
-                      ],
-                    ),
-                  ],
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            allReviews[0].user.name,
+                            style: const TextStyle(
+                              color: AppColours.primaryColour,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const Rating(),
+                        ],
+                      ),
+                      const Expanded(child: SizedBox()),
+                      Text(
+                        DateFormat('MMMM d, y').format(allReviews[0].date),
+                        style: const TextStyle(
+                          color: AppColours.darkerGray,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -157,75 +178,71 @@ class BuyingView extends StatelessWidget {
   }
 }
 
-class AddingWidget extends StatefulWidget {
-  const AddingWidget({super.key});
+class AddingWidget extends StatelessWidget {
+  const AddingWidget({
+    super.key,
+    required this.addKilograms,
+    required this.takeKilograms,
+    required this.ammountOfItens,
+  });
+
+  final VoidCallback addKilograms;
+  final VoidCallback takeKilograms;
+  final RxDouble ammountOfItens;
 
   @override
-  State<AddingWidget> createState() => _AddingWidgetState();
-}
-
-class _AddingWidgetState extends State<AddingWidget> {
-  double ammountOfItens = 1;
-
-  @override
-  Widget build(final BuildContext context) => Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                ammountOfItens = ammountOfItens - 0.2;
-              });
-            },
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: const BoxDecoration(
-                color: AppColours.primaryColour,
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  "assets/icons/minus-small.svg",
-                  height: 35,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+  Widget build(final BuildContext context) => Obx(
+        () => Row(
+          children: [
+            GestureDetector(
+              onTap: takeKilograms,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: const BoxDecoration(
+                  color: AppColours.primaryColour,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    "assets/icons/minus-small.svg",
+                    height: 35,
+                    colorFilter:
+                        const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Text(
-            "${ammountOfItens.toStringAsFixed(2)} Kg",
-            style: const TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 15,
-            ),
-          ),
-          const SizedBox(width: 10),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                ammountOfItens = ammountOfItens + 0.2;
-              });
-            },
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: const BoxDecoration(
-                color: AppColours.primaryColour,
-                shape: BoxShape.circle,
+            const SizedBox(width: 10),
+            Text(
+              "${ammountOfItens.value.toStringAsFixed(2)} Kg",
+              style: const TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 15,
               ),
-              child: Center(
-                child: SvgPicture.asset(
-                  "assets/icons/plus.svg",
-                  height: 20,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            ),
+            const SizedBox(width: 10),
+            GestureDetector(
+              onTap: addKilograms,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: const BoxDecoration(
+                  color: AppColours.primaryColour,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    "assets/icons/plus.svg",
+                    height: 20,
+                    colorFilter:
+                        const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
 }
 

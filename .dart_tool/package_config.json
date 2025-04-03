@@ -128,6 +128,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///home/jorge/.pub-cache/hosted/pub.dev/intl-0.20.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
       "name": "leak_tracker",
       "rootUri": "file:///home/jorge/.pub-cache/hosted/pub.dev/leak_tracker-10.0.8",
       "packageUri": "lib/",
@@ -362,7 +368,7 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2025-04-01T23:22:19.309194Z",
+  "generated": "2025-04-02T19:06:22.392253Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///home/jorge/Documents/Codes/Flutter/flutter",

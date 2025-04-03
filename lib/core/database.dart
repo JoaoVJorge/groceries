@@ -36,7 +36,7 @@ class Review extends Equatable {
   final UserEntity user;
   final int rating;
   final String? description;
-  final String date;
+  final DateTime date;
   final GroceryItem item;
   @override
   List<Object?> get props => [user, rating, description, date, item];
@@ -84,7 +84,7 @@ final List<Review> allReviews = [
     user: allUsers[0],
     rating: 1,
     description: "i Not just Liked it but i loved it!",
-    date: "19:21",
+    date: DateTime(2023, 10, 2),
     item: allGroceryItems[0],
   ),
 ];
