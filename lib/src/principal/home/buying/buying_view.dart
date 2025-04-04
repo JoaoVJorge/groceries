@@ -36,6 +36,7 @@ class BuyingView extends StatelessWidget {
                 ),
                 const Expanded(child: SizedBox()),
                 InkWell(
+                  onTap: controller.goToMyCart,
                   child: Container(
                     width: 240,
                     height: 65,
