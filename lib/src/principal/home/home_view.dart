@@ -23,15 +23,10 @@ class HomeView extends StatelessWidget {
             onSearchChanged: controller.onSearchChanged,
             onFiltered: controller.onFiltered,
           ),
-          Obx(
-            () {
-              controller.filteredGroceries.reactive;
-              return OferringProducts(
-                groceryList: controller.filteredGroceries,
-                whereTo: controller.goToBuying,
-                onSearch: controller.onSearch,
-              );
-            },
+          OferringProducts(
+            groceryList: controller.filteredGroceries,
+            whereTo: controller.goToBuying,
+            onSearch: controller.onSearch,
           ),
         ],
       ),

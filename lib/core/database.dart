@@ -105,12 +105,13 @@ final List<GroceryItem> allGroceryItems = [
       Review(
         user: allUsers[0],
         rating: 1,
-        description: "i Not just Liked it but i loved it!",
+        description:
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         date: DateTime(2023, 10, 2),
       ),
     ],
   ),
-  const GroceryItem(
+  GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
     name: "Banana",
     calories: 89.0,
@@ -118,7 +119,22 @@ final List<GroceryItem> allGroceryItems = [
     type: "Fruit",
     isAvailable: true,
     description: "Naturally sweet and packed with potassium, great for energy.",
-    reviews: [],
+    reviews: [
+      Review(
+        user: allUsers[0],
+        rating: 1,
+        description:
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        date: DateTime(2023, 10, 2),
+      ),
+      Review(
+        user: allUsers[0],
+        rating: 2,
+        description:
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        date: DateTime(2023, 10, 2),
+      ),
+    ],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",

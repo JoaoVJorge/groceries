@@ -205,6 +205,9 @@ class ProductReview extends StatelessWidget {
           reviews.length,
           (final index) => Column(
             children: [
+              const SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
                   Container(
@@ -252,8 +255,17 @@ class ProductReview extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
+                  color: AppColours.gray,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
                 child: Text(
                   reviews[index].description ?? "",
                   style: const TextStyle(
@@ -262,6 +274,9 @@ class ProductReview extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 25,
               ),
             ],
           ),
@@ -282,58 +297,58 @@ class AddingWidget extends StatelessWidget {
   final RxDouble ammountOfItens;
 
   @override
-  Widget build(final BuildContext context) => Obx(
-        () => Row(
-          children: [
-            GestureDetector(
-              onTap: takeKilograms,
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: const BoxDecoration(
-                  color: AppColours.primaryColour,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    "assets/icons/minus-small.svg",
-                    height: 35,
-                    colorFilter:
-                        const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                  ),
+  Widget build(final BuildContext context) => Row(
+        children: [
+          GestureDetector(
+            onTap: takeKilograms,
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: const BoxDecoration(
+                color: AppColours.primaryColour,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  "assets/icons/minus-small.svg",
+                  height: 35,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 ),
               ),
             ),
-            const SizedBox(width: 10),
-            Text(
+          ),
+          const SizedBox(width: 10),
+          Obx(
+            () => Text(
               "${ammountOfItens.value.toStringAsFixed(2)} Kg",
               style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 15,
               ),
             ),
-            const SizedBox(width: 10),
-            GestureDetector(
-              onTap: addKilograms,
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: const BoxDecoration(
-                  color: AppColours.primaryColour,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    "assets/icons/plus.svg",
-                    height: 20,
-                    colorFilter:
-                        const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                  ),
+          ),
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: addKilograms,
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: const BoxDecoration(
+                color: AppColours.primaryColour,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  "assets/icons/plus.svg",
+                  height: 20,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       );
 }
 
