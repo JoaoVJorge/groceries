@@ -1,5 +1,6 @@
-import 'package:app_congonhas/src/login/register/enter_account/enter_account_controller.dart';
 import 'package:get/get.dart';
+
+import 'enter_account_controller.dart';
 
 class EnterAccountBinding extends Bindings {
   @override

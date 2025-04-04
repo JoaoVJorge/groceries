@@ -14,157 +14,170 @@ class BuyingView extends StatelessWidget {
   Widget build(final BuildContext context) {
     final BuyingController controller = Get.find();
     return Scaffold(
-      body: ListView(
+      body: Stack(
         children: [
-          Stack(
-            children: [
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width,
-                height: 500,
-                child: Image.asset(allGroceryItems[0].imageUrl),
-              ),
-              Positioned(
-                top: 35,
-                left: 35,
-                child: GestureDetector(
-                  onTap: controller.goToHome,
-                  child: Container(
-                    width: 50,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: AppColours.gray, width: 3),
-                      borderRadius: const BorderRadius.all(Radius.circular(25)),
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        "assets/icons/arrow-left.svg",
-                        height: 25,
-                        colorFilter: const ColorFilter.mode(
-                          AppColours.darkerGray,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 30,
+              vertical: 25,
+            ),
+            height: double.infinity,
+            color: AppColours.primaryColour,
+            alignment: Alignment.bottomLeft,
             child: Row(
               children: [
-                SizedBox(
-                  width: 220,
-                  height: 50 * 1.32,
-                  child: Text(
-                    controller.groceryItem.name,
-                    style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      color: AppColours.primaryColour,
-                      fontSize: 50,
-                      fontWeight: FontWeight.w600,
-                    ),
+                Text(
+                  "${controller.groceryItem.price} \$ / Kg",
+                  style: const TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
                   ),
                 ),
                 const Expanded(child: SizedBox()),
-                AddingWidget(
-                  addKilograms: controller.addKilograms,
-                  takeKilograms: controller.takeKilograms,
-                  ammountOfItens: controller.ammountOfItens,
+                InkWell(
+                  child: Container(
+                    width: 240,
+                    height: 65,
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(35),
+                      ),
+                    ),
+                    child: const Text(
+                      "Add to cart",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: AppColours.primaryColour,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 35),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          Container(
+            height: MediaQuery.sizeOf(context).height * .88,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(50),
+              ),
+            ),
+            child: ListView(
               children: [
-                Text(
-                  controller.groceryItem.isAvailable
-                      ? "Available In Stock"
-                      : "Not Available",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                    color: AppColours.darkerGray,
-                  ),
-                ),
-                const SizedBox(height: 14),
-                const Text(
-                  "Product Description",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.w700,
-                    color: AppColours.primaryColour,
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  controller.groceryItem.description,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: AppColours.darkerGray,
-                  ),
-                ),
-                const SizedBox(height: 14),
-                const Text(
-                  "Product Review",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.w700,
-                    color: AppColours.primaryColour,
-                  ),
-                ),
-                SizedBox(
-                  height: 80,
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(),
-                          color: Colors.black,
-                        ),
-                        child: ClipOval(
-                          // Ensures the image is clipped to a circle
-                          child: Image.asset(
-                            allReviews[0].user.imageUrl,
-                            fit: BoxFit.cover,
+                Stack(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 500,
+                      child: Image.asset(allGroceryItems[0].imageUrl),
+                    ),
+                    Positioned(
+                      top: 35,
+                      left: 35,
+                      child: GestureDetector(
+                        onTap: controller.goToHome,
+                        child: Container(
+                          width: 50,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border:
+                                Border.all(color: AppColours.gray, width: 3),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(25)),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            allReviews[0].user.name,
-                            style: const TextStyle(
-                              color: AppColours.primaryColour,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                          child: Center(
+                            child: SvgPicture.asset(
+                              "assets/icons/arrow-left.svg",
+                              height: 25,
+                              colorFilter: const ColorFilter.mode(
+                                AppColours.darkerGray,
+                                BlendMode.srcIn,
+                              ),
                             ),
                           ),
-                          const Rating(),
-                        ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 220,
+                        height: 50 * 1.32,
+                        child: Text(
+                          controller.groceryItem.name,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: AppColours.primaryColour,
+                            fontSize: 50,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                       const Expanded(child: SizedBox()),
+                      AddingWidget(
+                        addKilograms: controller.addKilograms,
+                        takeKilograms: controller.takeKilograms,
+                        ammountOfItens: controller.ammountOfItens,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 35),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        DateFormat('MMMM d, y').format(allReviews[0].date),
+                        controller.groceryItem.isAvailable
+                            ? "Available In Stock"
+                            : "Not Available",
                         style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
                           color: AppColours.darkerGray,
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      const Text(
+                        "Product Description",
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.w700,
+                          color: AppColours.primaryColour,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        controller.groceryItem.description,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
+                          color: AppColours.darkerGray,
                         ),
+                      ),
+                      const SizedBox(height: 14),
+                      const Text(
+                        "Product Review",
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.w700,
+                          color: AppColours.primaryColour,
+                        ),
+                      ),
+                      ProductReview(
+                        reviews: controller.groceryItem.reviews,
                       ),
                     ],
                   ),
@@ -176,6 +189,84 @@ class BuyingView extends StatelessWidget {
       ),
     );
   }
+}
+
+class ProductReview extends StatelessWidget {
+  const ProductReview({
+    super.key,
+    required this.reviews,
+  });
+
+  final List<Review> reviews;
+
+  @override
+  Widget build(final BuildContext context) => Column(
+        children: List.generate(
+          reviews.length,
+          (final index) => Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(),
+                      color: Colors.black,
+                    ),
+                    child: ClipOval(
+                      // Ensures the image is clipped to a circle
+                      child: Image.asset(
+                        reviews[index].user.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        reviews[index].user.name,
+                        style: const TextStyle(
+                          color: AppColours.primaryColour,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Rating(rating: reviews[index].rating),
+                    ],
+                  ),
+                  const Expanded(child: SizedBox()),
+                  Text(
+                    DateFormat('MMMM d, y').format(reviews[index].date),
+                    style: const TextStyle(
+                      color: AppColours.darkerGray,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.all(20),
+                child: Text(
+                  reviews[index].description ?? "",
+                  style: const TextStyle(
+                    color: AppColours.darkerGray,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
 }
 
 class AddingWidget extends StatelessWidget {
@@ -247,7 +338,9 @@ class AddingWidget extends StatelessWidget {
 }
 
 class Rating extends StatelessWidget {
-  const Rating({super.key});
+  const Rating({super.key, required this.rating});
+
+  final int rating;
 
   @override
   Widget build(final BuildContext context) => Row(
@@ -261,9 +354,7 @@ class Rating extends StatelessWidget {
                 height: 17,
                 width: 17,
                 colorFilter: ColorFilter.mode(
-                  index < allReviews[0].rating
-                      ? Colors.orange
-                      : AppColours.gray,
+                  index < rating ? Colors.orange : AppColours.gray,
                   BlendMode.srcIn,
                 ),
               ),

@@ -1,16 +1,17 @@
-import 'package:app_congonhas/src/login/register/enter_account/enter_account_controller.dart';
-import 'package:app_congonhas/src/login/register/password_input.dart';
-import 'package:app_congonhas/theme/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../../../../theme/colours.dart';
+import '../password_input.dart';
+import 'enter_account_controller.dart';
 
 class EnterAccountView extends StatelessWidget {
   const EnterAccountView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    EnterAccountController controller = Get.find();
+  Widget build(final BuildContext context) {
+    final EnterAccountController controller = Get.find();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -19,9 +20,7 @@ class EnterAccountView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InkWell(
-              onTap: () {
-                controller.goToWelcome();
-              },
+              onTap: controller.goToWelcome,
               borderRadius: const BorderRadius.all(
                 Radius.circular(30),
               ),
@@ -126,7 +125,7 @@ class EnterAccountView extends StatelessWidget {
                       style:
                           TextStyle(color: Colors.orangeAccent, fontSize: 18),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -153,8 +152,9 @@ class EnterAccountView extends StatelessWidget {
                   width: 400,
                   height: 60,
                   decoration: const BoxDecoration(
-                      color: AppColours.primaryColour,
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                    color: AppColours.primaryColour,
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                  ),
                   child: const Center(
                     child: Text(
                       "Continue",
@@ -201,8 +201,9 @@ class EnterAccountView extends StatelessWidget {
                   width: 400,
                   height: 60,
                   decoration: const BoxDecoration(
-                      color: AppColours.undetectColour,
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                    color: AppColours.undetectColour,
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -234,8 +235,9 @@ class EnterAccountView extends StatelessWidget {
                   width: 400,
                   height: 60,
                   decoration: const BoxDecoration(
-                      color: AppColours.undetectColour,
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                    color: AppColours.undetectColour,
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -267,7 +269,7 @@ class EnterAccountView extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => controller.goToMakeAccount(),
+                  onTap: controller.goToMakeAccount,
                   child: const Text(
                     "Sign Up",
                     style: TextStyle(
@@ -277,7 +279,7 @@ class EnterAccountView extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -295,47 +297,45 @@ class StayConnected extends StatefulWidget {
 class _StayConnectedState extends State<StayConnected> {
   bool stateConnection = false;
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      height: 35,
-      width: 35,
-      child: GestureDetector(
-        onTap: () => {setState(() => stateConnection = !stateConnection)},
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Positioned.fill(
-              child: Center(
-                child: Container(
-                  height: 20,
-                  width: 20,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(87, 158, 158, 158),
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
+  Widget build(final BuildContext context) => Container(
+        alignment: Alignment.centerLeft,
+        height: 35,
+        width: 35,
+        child: GestureDetector(
+          onTap: () => {setState(() => stateConnection = !stateConnection)},
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Positioned.fill(
+                child: Center(
+                  child: Container(
+                    height: 20,
+                    width: 20,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(87, 158, 158, 158),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 8,
-              left: 10,
-              child: stateConnection == true
-                  ? Center(
-                      child: SvgPicture.asset(
-                        "assets/icons/check.svg",
-                        height: 25,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.blueAccent,
-                          BlendMode.srcIn,
+              Positioned(
+                bottom: 8,
+                left: 10,
+                child: stateConnection == true
+                    ? Center(
+                        child: SvgPicture.asset(
+                          "assets/icons/check.svg",
+                          height: 25,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.blueAccent,
+                            BlendMode.srcIn,
+                          ),
                         ),
-                      ),
-                    )
-                  : Container(),
-            ),
-          ],
+                      )
+                    : Container(),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }

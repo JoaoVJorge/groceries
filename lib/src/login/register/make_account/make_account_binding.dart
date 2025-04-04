@@ -1,5 +1,6 @@
-import 'package:app_congonhas/src/login/register/make_account/make_account_controller.dart';
 import 'package:get/get.dart';
+
+import 'make_account_controller.dart';
 
 class MakeAccountBinding extends Bindings {
   @override

@@ -11,6 +11,7 @@ class GroceryItem extends Equatable {
     required this.type,
     required this.isAvailable,
     required this.description,
+    required this.reviews,
   });
   final String imageUrl;
   final String name;
@@ -19,10 +20,19 @@ class GroceryItem extends Equatable {
   final String type;
   final bool isAvailable;
   final String description;
+  final List<Review> reviews;
 
   @override
-  List<Object?> get props =>
-      [imageUrl, name, calories, price, type, isAvailable, description];
+  List<Object?> get props => [
+        imageUrl,
+        name,
+        calories,
+        price,
+        type,
+        isAvailable,
+        description,
+        reviews,
+      ];
 }
 
 class Review extends Equatable {
@@ -31,15 +41,18 @@ class Review extends Equatable {
     required this.rating,
     required this.description,
     required this.date,
-    required this.item,
   });
   final UserEntity user;
   final int rating;
   final String? description;
   final DateTime date;
-  final GroceryItem item;
   @override
-  List<Object?> get props => [user, rating, description, date, item];
+  List<Object?> get props => [
+        user,
+        rating,
+        description,
+        date,
+      ];
 }
 
 class UserEntity extends Equatable {
@@ -79,18 +92,8 @@ final List<UserEntity> allUsers = [
   ),
 ];
 
-final List<Review> allReviews = [
-  Review(
-    user: allUsers[0],
-    rating: 1,
-    description: "i Not just Liked it but i loved it!",
-    date: DateTime(2023, 10, 2),
-    item: allGroceryItems[0],
-  ),
-];
-
 final List<GroceryItem> allGroceryItems = [
-  const GroceryItem(
+  GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
     name: "Apple",
     calories: 52.0,
@@ -98,6 +101,14 @@ final List<GroceryItem> allGroceryItems = [
     type: "Fruit",
     isAvailable: false,
     description: "Crisp and sweet red apples, perfect for snacks or baking.",
+    reviews: [
+      Review(
+        user: allUsers[0],
+        rating: 1,
+        description: "i Not just Liked it but i loved it!",
+        date: DateTime(2023, 10, 2),
+      ),
+    ],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
@@ -107,6 +118,7 @@ final List<GroceryItem> allGroceryItems = [
     type: "Fruit",
     isAvailable: true,
     description: "Naturally sweet and packed with potassium, great for energy.",
+    reviews: [],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
@@ -116,6 +128,7 @@ final List<GroceryItem> allGroceryItems = [
     type: "Wheat",
     isAvailable: true,
     description: "Nutritious and fiber-rich bread for a healthy diet.",
+    reviews: [],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
@@ -125,6 +138,7 @@ final List<GroceryItem> allGroceryItems = [
     type: "Dairy",
     isAvailable: true,
     description: "Fresh and creamy milk, rich in calcium and vitamins.",
+    reviews: [],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
@@ -134,6 +148,7 @@ final List<GroceryItem> allGroceryItems = [
     type: "Dairy",
     isAvailable: true,
     description: "Delicious and versatile cheese for sandwiches or cooking.",
+    reviews: [],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
@@ -143,6 +158,7 @@ final List<GroceryItem> allGroceryItems = [
     type: "Meat",
     isAvailable: false,
     description: "Farm-fresh eggs, ideal for breakfast or baking.",
+    reviews: [],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
@@ -152,6 +168,7 @@ final List<GroceryItem> allGroceryItems = [
     type: "Fruit",
     isAvailable: false,
     description: "Juicy and vitamin C-rich, great for immunity.",
+    reviews: [],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
@@ -161,6 +178,7 @@ final List<GroceryItem> allGroceryItems = [
     type: "Meat",
     isAvailable: true,
     description: "Lean and protein-packed, perfect for grilling or frying.",
+    reviews: [],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
@@ -170,6 +188,7 @@ final List<GroceryItem> allGroceryItems = [
     type: "Vegetable",
     isAvailable: true,
     description: "Versatile and filling, a staple in many cuisines.",
+    reviews: [],
   ),
   const GroceryItem(
     imageUrl: "assets/images/morango_sem.png",
@@ -179,6 +198,7 @@ final List<GroceryItem> allGroceryItems = [
     type: "Meat",
     isAvailable: true,
     description: "Rich in omega-3, great for heart health and grilling.",
+    reviews: [],
   ),
 ];
 

@@ -1,5 +1,6 @@
-import 'package:app_congonhas/path/app_routes.dart';
 import 'package:get/get.dart';
+
+import '../../../../path/app_routes.dart';
 
 class EnterAccountController extends DisposableInterface {
   String email = "";
@@ -7,11 +8,11 @@ class EnterAccountController extends DisposableInterface {
 
   final RxString errorText = "".obs;
 
-  void setEmail(String email) {
+  void setEmail(final String email) {
     this.email = email;
   }
 
-  void setPassword(String password) {
+  void setPassword(final String password) {
     this.password = password;
   }
 
@@ -21,8 +22,8 @@ class EnterAccountController extends DisposableInterface {
     } else if (email.length > 70) {
       errorText.value = "Email too long";
     } else if (!RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email)) {
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    ).hasMatch(email)) {
       errorText.value = "Not a valid Email";
     } else {
       errorText.value = "";

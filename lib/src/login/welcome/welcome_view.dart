@@ -1,14 +1,15 @@
-import 'package:app_congonhas/src/login/welcome/welcome_controller.dart';
-import 'package:app_congonhas/theme/colours.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../theme/colours.dart';
+import 'welcome_controller.dart';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final WelcomeController controller = Get.find();
     return Scaffold(
       backgroundColor: AppColours.primaryColour,
@@ -28,9 +29,10 @@ class WelcomeView extends StatelessWidget {
                   const Text(
                     "Welcome to The Grocery Shop",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 33,
-                        fontWeight: FontWeight.w900),
+                      color: Colors.white,
+                      fontSize: 33,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                   const SizedBox(
                     height: 30,
@@ -39,17 +41,16 @@ class WelcomeView extends StatelessWidget {
                     textAlign: TextAlign.center,
                     controller.description,
                     style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w300),
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                   const SizedBox(
                     height: 140,
                   ),
                   InkWell(
-                    onTap: () {
-                      controller.goToMakeAccount();
-                    },
+                    onTap: controller.goToMakeAccount,
                     child: Container(
                       width: 400,
                       height: 60,
@@ -69,11 +70,11 @@ class WelcomeView extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -98,40 +99,38 @@ class _ImageCarouselState extends State<ImageCarousel> {
   final double ballVerticalSpacing = 16;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      spacing: ballVerticalSpacing,
-      children: [
-        ClipRRect(
-          borderRadius:
-              const BorderRadius.vertical(bottom: Radius.circular(40)),
-          child: CarouselSlider.builder(
-            options: CarouselOptions(
-              autoPlay: true,
-              viewportFraction: 1,
-              height: MediaQuery.sizeOf(context).height / 2 -
-                  ballSize -
-                  ballVerticalSpacing,
-              onPageChanged: (index, reason) =>
-                  setState(() => currentPageIndex = index),
-            ),
-            itemCount: widget.imagePathList.length,
-            itemBuilder: (BuildContext context, int index, int realIndex) {
-              return Image.asset(
+  Widget build(final BuildContext context) => Column(
+        spacing: ballVerticalSpacing,
+        children: [
+          ClipRRect(
+            borderRadius:
+                const BorderRadius.vertical(bottom: Radius.circular(40)),
+            child: CarouselSlider.builder(
+              options: CarouselOptions(
+                autoPlay: true,
+                viewportFraction: 1,
+                height: MediaQuery.sizeOf(context).height / 2 -
+                    ballSize -
+                    ballVerticalSpacing,
+                onPageChanged: (final index, final reason) =>
+                    setState(() => currentPageIndex = index),
+              ),
+              itemCount: widget.imagePathList.length,
+              itemBuilder: (final BuildContext context, final int index,
+                      final int realIndex) =>
+                  Image.asset(
                 widget.imagePathList[index],
                 fit: BoxFit.cover,
-              );
-            },
+              ),
+            ),
           ),
-        ),
-        SmallBalls(
-          currentIndex: currentPageIndex,
-          intemCount: widget.imagePathList.length,
-          ballSize: ballSize,
-        ),
-      ],
-    );
-  }
+          SmallBalls(
+            currentIndex: currentPageIndex,
+            intemCount: widget.imagePathList.length,
+            ballSize: ballSize,
+          ),
+        ],
+      );
 }
 
 class SmallBalls extends StatelessWidget {
@@ -147,22 +146,20 @@ class SmallBalls extends StatelessWidget {
   final double ballSize;
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        intemCount,
-        (index) => AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          width: index == currentIndex ? 40 : ballSize,
-          height: ballSize,
-          margin: index != 0 ? const EdgeInsets.only(left: 12) : null,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(ballSize)),
-            color: index == currentIndex ? Colors.white : Colors.white30,
+  Widget build(final BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          intemCount,
+          (final index) => AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            width: index == currentIndex ? 40 : ballSize,
+            height: ballSize,
+            margin: index != 0 ? const EdgeInsets.only(left: 12) : null,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(ballSize)),
+              color: index == currentIndex ? Colors.white : Colors.white30,
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

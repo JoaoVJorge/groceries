@@ -1,15 +1,16 @@
-import 'package:app_congonhas/src/login/register/make_account/make_account_controller.dart';
-import 'package:app_congonhas/src/login/register/password_input.dart';
-import 'package:app_congonhas/theme/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../theme/colours.dart';
+import '../password_input.dart';
+import 'make_account_controller.dart';
+
 class MakeAccountView extends StatelessWidget {
   const MakeAccountView({super.key});
   @override
-  Widget build(BuildContext context) {
-    MakeAccountController controller = Get.find();
+  Widget build(final BuildContext context) {
+    final MakeAccountController controller = Get.find();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -18,9 +19,7 @@ class MakeAccountView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InkWell(
-              onTap: () {
-                controller.goToWelcome();
-              },
+              onTap: controller.goToWelcome,
               borderRadius: const BorderRadius.all(
                 Radius.circular(30),
               ),
@@ -143,8 +142,9 @@ class MakeAccountView extends StatelessWidget {
                   width: 400,
                   height: 60,
                   decoration: const BoxDecoration(
-                      color: AppColours.primaryColour,
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                    color: AppColours.primaryColour,
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                  ),
                   child: const Center(
                     child: Text(
                       "Continue",
@@ -193,8 +193,9 @@ class MakeAccountView extends StatelessWidget {
                   width: 400,
                   height: 60,
                   decoration: const BoxDecoration(
-                      color: AppColours.undetectColour,
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                    color: AppColours.undetectColour,
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -226,8 +227,9 @@ class MakeAccountView extends StatelessWidget {
                   width: 400,
                   height: 60,
                   decoration: const BoxDecoration(
-                      color: AppColours.undetectColour,
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                    color: AppColours.undetectColour,
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -263,7 +265,7 @@ class MakeAccountView extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => controller.goToEnterAccount(),
+                  onTap: controller.goToEnterAccount,
                   child: const Text(
                     "Sign In",
                     style: TextStyle(
@@ -273,7 +275,7 @@ class MakeAccountView extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
