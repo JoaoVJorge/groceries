@@ -4,7 +4,7 @@ import '../../../../core/database.dart';
 import '../../../../path/app_routes.dart';
 
 class BuyingController extends DisposableInterface {
-  RxDouble ammountOfItens = 1.0.obs;
+  RxDouble ammountOfItens = .5.obs;
   final GroceryItem groceryItem = Get.arguments;
 
   void goToHome() {
@@ -12,7 +12,7 @@ class BuyingController extends DisposableInterface {
   }
 
   void addKilograms() {
-    ammountOfItens.value += 0.2;
+    ammountOfItens.value += 0.1;
   }
 
   void goToMyCart() {
@@ -20,6 +20,6 @@ class BuyingController extends DisposableInterface {
   }
 
   void takeKilograms() {
-    ammountOfItens.value > 0.4 ? ammountOfItens.value -= 0.2 : null;
+    ammountOfItens.value > 0.2 ? ammountOfItens.value -= 0.1 : null;
   }
 }

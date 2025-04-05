@@ -12,6 +12,7 @@ class MyCartView extends StatelessWidget {
   Widget build(final BuildContext context) {
     final MyCartController controller = Get.find<MyCartController>();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,6 +25,9 @@ class MyCartView extends StatelessWidget {
             whereTo: controller.goToBuying,
             groceryList: controller.filteredGroceries,
             onSearch: controller.onSearch,
+            ammountOfItens: controller.ammountOfItens,
+            addKilograms: controller.addKilograms,
+            takeKilograms: controller.takeKilograms,
           ),
         ],
       ),
@@ -52,7 +56,7 @@ class SearchingItens extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,7 +103,7 @@ class SearchingItens extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 40),
                   ],
                 ),
               )
@@ -184,11 +188,17 @@ class OferringProducts extends StatelessWidget {
     required this.groceryList,
     required this.whereTo,
     required this.onSearch,
+    required this.ammountOfItens,
+    required this.addKilograms,
+    required this.takeKilograms,
   });
 
   final List<GroceryItem> groceryList;
   final Function(GroceryItem) whereTo;
   final RxBool onSearch;
+  final RxDouble ammountOfItens;
+  final VoidCallback addKilograms;
+  final VoidCallback takeKilograms;
 
   @override
   Widget build(final BuildContext context) => Expanded(
@@ -230,10 +240,11 @@ class OferringProducts extends StatelessWidget {
                             ),
                           ),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                width: 220,
+                                width: 200,
                                 height: 25 * 1.32,
                                 child: Text(
                                   groceryList[index].name,
@@ -263,33 +274,90 @@ class OferringProducts extends StatelessWidget {
                               ),
                             ],
                           ),
-                          GestureDetector(
-                            onTap: () => whereTo(groceryList[index]),
-                            child: Container(
-                              width: 45,
-                              height: 45,
-                              decoration: const BoxDecoration(
-                                color: Colors.deepOrangeAccent,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: Center(
-                                child: SvgPicture.asset(
-                                  "assets/icons/plus.svg",
-                                  height: 25,
-                                  colorFilter: const ColorFilter.mode(
-                                    Colors.white,
-                                    BlendMode.srcIn,
+                          const Expanded(
+                            child: SizedBox(),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: addKilograms,
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: Center(
+                                    child: SvgPicture.asset(
+                                      "assets/icons/plus.svg",
+                                      height: 25,
+                                      colorFilter: const ColorFilter.mode(
+                                        AppColours.darkerGray,
+                                        BlendMode.srcIn,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Container(
+                                width: 50,
+                                height: 50,
+                                decoration: const BoxDecoration(
+                                  color: AppColours.primaryColour,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: Center(
+                                  child: Obx(
+                                    () => Text(
+                                      ammountOfItens.value.toStringAsFixed(2),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              GestureDetector(
+                                onTap: takeKilograms,
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                  child: Center(
+                                    child: SvgPicture.asset(
+                                      "assets/icons/minus-small.svg",
+                                      height: 40,
+                                      colorFilter: const ColorFilter.mode(
+                                        AppColours.darkerGray,
+                                        BlendMode.srcIn,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 30,
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 25,
                     ),
                   ],
                 ),

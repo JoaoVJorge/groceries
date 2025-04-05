@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(final BuildContext context) => GetMaterialApp(
         getPages: AppRoutes.getPages,
-        initialRoute: AppRoutes.home,
+        initialRoute: AppRoutes.splash,
         debugShowCheckedModeBanner: false,
       );
 }

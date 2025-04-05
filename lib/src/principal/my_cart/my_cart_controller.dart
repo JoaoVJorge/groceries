@@ -5,6 +5,7 @@ import '../../../path/app_routes.dart';
 
 class MyCartController extends DisposableInterface {
   final RxList<GroceryItem> filteredGroceries = <GroceryItem>[].obs;
+  RxDouble ammountOfItens = .5.obs;
   RxBool onSearch = false.obs;
 
   @override
@@ -36,5 +37,17 @@ class MyCartController extends DisposableInterface {
 
   void changeSearchingState() {
     onSearch.value = !onSearch.value;
+  }
+
+  void addKilograms() {
+    ammountOfItens.value += 0.1;
+  }
+
+  void goToMyCart() {
+    Get.toNamed(AppRoutes.myCart);
+  }
+
+  void takeKilograms() {
+    ammountOfItens.value > 0.2 ? ammountOfItens.value -= 0.1 : null;
   }
 }
